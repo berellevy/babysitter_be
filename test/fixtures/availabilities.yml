@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sitter: one
+  start: 2020-11-03 16:14:51
+  end: 2020-11-03 16:14:51
+  weekday: 1
+
+two:
+  sitter: two
+  start: 2020-11-03 16:14:51
+  end: 2020-11-03 16:14:51
+  weekday: 1
