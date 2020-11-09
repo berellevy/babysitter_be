@@ -6,13 +6,17 @@ class Sitter < ApplicationRecord
     ((Time.zone.now - birthday.to_time) / 1.year.seconds).floor
   end
 
-  def self.with_calc
-    all.map do |s|
-      obj = s.serializable_hash.symbolize_keys
+  def with_calc
+    obj = serializable_hash.symbolize_keys
       {
         **obj, 
-        age: s.age
+        age: age
       }
+  end
+
+  def self.with_calc
+    all.map do |s|
+      s.with_calc
     end
 
   end
