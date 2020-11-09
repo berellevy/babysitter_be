@@ -7,10 +7,10 @@ class Sitter < ApplicationRecord
   end
 
   def with_calc
-    obj = serializable_hash.symbolize_keys
       {
-        **obj, 
-        age: age
+        **serializable_hash.symbolize_keys, 
+        age: age,
+        references: references
       }
   end
 

@@ -1,4 +1,7 @@
 Sitter.all.each do |sitter|
-  sitter.contact_relation = ["mother", "Aunt", "Legal Guardian"].sample
-  sitter.save
+  sitter.references.create(
+    name: ["chaya", "zalmy", "Merale"].sample,
+    phone: "9176798518"
+
+    )
 end
