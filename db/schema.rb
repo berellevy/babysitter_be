@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_11_165426) do
+ActiveRecord::Schema.define(version: 2020_11_11_213409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2020_11_11_165426) do
   end
 
   create_table "sitters", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
     t.datetime "birthday"
     t.integer "years_of_experience"
     t.text "bio"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 2020_11_11_165426) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "price"
     t.string "contact_relation"
+    t.string "last_name", null: false
+    t.boolean "available", default: true, null: false
   end
 
   add_foreign_key "availabilities", "sitters"
