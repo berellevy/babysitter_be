@@ -1,8 +1,9 @@
 
-a = Sitter.first.availabilities.create(
-  weekday: 0,
-  start_time: "19:38",
-  end_time: "20:39"
+
+a = Sitter.all[1].availabilities.create(
+  weekday: 3,
+  start_time: "3:45",
+  end_time: "19:45"
 )
 
 p a
