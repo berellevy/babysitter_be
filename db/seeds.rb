@@ -1,12 +1,36 @@
 
+first_names = [
+  "Gitty",
+  "Chaya",
+  "Sara",
+  "Rivka",
+  "Nechama",
+  "Leah",
+  "Yehudis",
+  "Yocheved"
+]
 
-a = Sitter.all[1].availabilities.create(
-  weekday: 3,
-  start_time: "3:45",
-  end_time: "19:45"
-)
+last_names = [
+  "Lipszyc",
+  "Goldberg",
+  "Klein",
+  "Refsen",
+  "Greenblat",
+  "Gorowitz",
+  "Karp",
+  "Hershkowitz"
+]
 
-p a
-p "valid: #{a.valid?}" 
-puts "------------------"
-p a.errors.messages
+Availability.destroy_all
+puts "Availabilities DESTROYED"
+Reference.destroy_all
+puts "References DESTROYED"
+Sitter.destroy_all
+puts "Sitters DESTROYED"
+
+7.times do |i| 
+  Sitter.create(
+
+  )
+end
+
