@@ -15,7 +15,8 @@ class Sitter < ApplicationRecord
         **serializable_hash.symbolize_keys, 
         age: age,
         references: references,
-        availabilities: availabilities
+        availabilities: availabilities,
+        appointments: appointments
       }
   end
 
