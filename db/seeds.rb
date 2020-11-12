@@ -61,7 +61,8 @@ def sample_minutes
     ":45"
   ].sample
 end
-
+Appointment.destroy_all
+puts "Appointments DESTROYED"
 Availability.destroy_all
 puts "Availabilities DESTROYED"
 Reference.destroy_all
@@ -99,10 +100,21 @@ puts "Sitters DESTROYED"
       )
     end
   end
+  should_i_run = true
+  s.availabilities.each do |a|
+    if should_i_run
+      s.appointments.create(
+        start_time: a.start_time,
+        end_time: a.end_time
+      )
+    end
+    should_i_run = !should_i_run
+  end
 
 end
 
 pp Sitter.first
 pp Reference.first
 pp Availability.first
+pp Appointment.first
 
