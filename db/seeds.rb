@@ -7,7 +7,14 @@ first_names = [
   "Nechama",
   "Leah",
   "Yehudis",
-  "Yocheved"
+  "Yocheved",
+  "Adina",
+  "Rochel",
+  "Mushky",
+  "Shterna",
+  "Devorah",
+  "Esther",
+  "Chana"
 ]
 
 last_names = [
@@ -18,7 +25,21 @@ last_names = [
   "Greenblat",
   "Gorowitz",
   "Karp",
-  "Hershkowitz"
+  "Hershkowitz",
+  "Levin",
+  "Feldman",
+  "Cohen",
+  "Lustig",
+  "Hershkop",
+  "Springer",
+  "Junik",
+  "Shpritzer",
+  "Goldfarb",
+  "Goldman",
+  "Rosen",
+  "Bronstein",
+  "Laine",
+  "Goodman"
 ]
 
 relations = [
@@ -32,6 +53,15 @@ def sample(range)
   range.to_a.sample
 end
 
+def sample_minutes
+  [
+    ":00",
+    ":15",
+    ":30",
+    ":45"
+  ].sample
+end
+
 Availability.destroy_all
 puts "Availabilities DESTROYED"
 Reference.destroy_all
@@ -39,7 +69,7 @@ puts "References DESTROYED"
 Sitter.destroy_all
 puts "Sitters DESTROYED"
 
-7.times do |i| 
+40.times do
   s = Sitter.create(
     first_name: first_names.sample,
     last_name: last_names.sample,
@@ -52,21 +82,27 @@ puts "Sitters DESTROYED"
     contact_relation: relations.sample
   )
 
-  sample(2..4).times do |i|
+  sample(2..4).times do
     s.references.create(
       name: "#{first_names.sample} #{last_names.sample}",
       phone: "555-555-5555"
     )
   end
-
-  # (2..4).to_a.sample.times do |i|
-  #   s.availabilities.create(
-  #     start_time
-  #   )
-  # end
+  6.times do |i|
+    sample(0..2).times do
+      start_hour = sample(12..19)
+      end_hour = start_hour + sample(2..4)
+      s.availabilities.create(
+        start_time: start_hour.to_s + sample_minutes,
+        end_time: end_hour.to_s + sample_minutes, 
+        weekday: i
+      )
+    end
+  end
 
 end
 
 pp Sitter.first
 pp Reference.first
+pp Availability.first
 

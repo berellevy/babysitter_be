@@ -1,8 +1,7 @@
 class Api::V1::SittersController < ApplicationController
   def index
-
-    sitters = Sitter.find_by_availabilities(params).with_calc
-    render json: sitters
+    sitters = Sitter.find_by_availabilities(params)
+    render json: sitters.with_calc
   end
 
 

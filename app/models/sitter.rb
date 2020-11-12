@@ -21,14 +21,18 @@ class Sitter < ApplicationRecord
   ## CLASS METHODS
 
   def self.find_by_availabilities(params)
+    day, from, to = params.values_at("day", "from", "to")
     day = Date.parse(params["day"]).cwday
 
     query_text = %{
+    sitters.available = true AND
     availabilities.weekday = ? AND
     availabilities.start_time <= ? AND
     availabilities.end_time >= ?
     }
-    joins(:availabilities).where(query_text, day, params["from"], params["to"])
+    group = "sitters.id"
+    select = "sitters.*"
+    joins(:availabilities).where(query_text, day, from, to).group(group).select(select)
   end
 
   def self.with_calc
