@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_11_213409) do
+ActiveRecord::Schema.define(version: 2020_11_12_160732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.bigint "sitter_id", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.string "title"
+    t.text "note"
+    t.string "contact_name"
+    t.string "contact_phone"
+    t.string "location"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sitter_id"], name: "index_appointments_on_sitter_id"
+  end
 
   create_table "availabilities", force: :cascade do |t|
     t.bigint "sitter_id", null: false
@@ -50,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_11_11_213409) do
     t.boolean "available", default: true, null: false
   end
 
+  add_foreign_key "appointments", "sitters"
   add_foreign_key "availabilities", "sitters"
   add_foreign_key "references", "sitters"
 end

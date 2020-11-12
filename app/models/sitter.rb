@@ -1,6 +1,7 @@
 class Sitter < ApplicationRecord
   has_many :references
   has_many :availabilities
+  has_many :appointments
 
 
   ## INSTANCE METHODS
@@ -13,7 +14,8 @@ class Sitter < ApplicationRecord
       {
         **serializable_hash.symbolize_keys, 
         age: age,
-        references: references
+        references: references,
+        availabilities: availabilities
       }
   end
 
