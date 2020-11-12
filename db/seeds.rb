@@ -103,9 +103,12 @@ puts "Sitters DESTROYED"
   should_i_run = true
   s.availabilities.each do |a|
     if should_i_run
+      date = (Date.today + rand(7)).strftime("%d/%m/%Y")
+      start_time = "#{date} #{a.start_time.strftime("%H:%M")}"
+      end_time = "#{date} #{a.end_time.strftime("%H:%M")}"
       s.appointments.create(
-        start_time: a.start_time,
-        end_time: a.end_time
+        start_time: start_time,
+        end_time: end_time
       )
     end
     should_i_run = !should_i_run
