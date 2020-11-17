@@ -24,7 +24,8 @@ class Sitter < ApplicationRecord
   ## CLASS METHODS
 
   def self.find_by_availabilities(params)
-    day, from, to = params.values_at("day", "from", "to")
+    day, start_time, duration = params.values_at("day", "startTime", "duration")
+
     day = Date.parse(params["day"]).cwday
 
     query_text = %{

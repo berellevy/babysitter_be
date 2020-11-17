@@ -1,5 +1,6 @@
 class Api::V1::SittersController < ApplicationController
   def index
+    puts params
     sitters = Sitter.find_by_availabilities(params)
     render json: sitters.with_calc
   end
