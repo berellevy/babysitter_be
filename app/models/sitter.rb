@@ -3,7 +3,6 @@ class Sitter < ApplicationRecord
   has_many :availabilities
   has_many :appointments
 
-
   ## INSTANCE METHODS
   
   def age 
