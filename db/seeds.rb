@@ -68,10 +68,9 @@ def add_appointments(sitter)
     if should_i_run
       date = (Date.today + rand(7)).strftime("%d/%m/%Y")
       start_time = "#{date} #{a.start_time.strftime("%H:%M")}"
-      end_time = "#{date} #{a.end_time.strftime("%H:%M")}"
       sitter.appointments.create(
         start_time: start_time,
-        end_time: end_time
+        duration_minutes: a.duration_minutes
       )
     end
   end
@@ -128,12 +127,12 @@ puts "Sitters DESTROYED"
   
   add_availabilities(sitter)
 
-  # add_appointments(sitter)
+  add_appointments(sitter)
 
 end
 puts ""
 pp Sitter.first
 pp Reference.first
 pp Availability.first
-# pp Appointment.first
+pp Appointment.first
 
