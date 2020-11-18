@@ -8,7 +8,7 @@ class Api::V1::SittersController < ApplicationController
 
 
   def show
-    sitter = Sitter.find(params[:id]).with_calc
+    sitter = Sitter.find(params[:id]).with_relations
     render json: sitter
   end
 end
