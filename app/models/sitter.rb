@@ -32,7 +32,6 @@ class Sitter < ApplicationRecord
       day, start_time, duration = params.values_at("day", "startTime", "duration")
 
       weekday = Date.parse(day).cwday
-      puts "weekday", weekday
 
       join_clause = <<-SQL 
         INNER JOIN (
@@ -58,6 +57,12 @@ class Sitter < ApplicationRecord
   def self.with_calc
     all.map do |s|
       s.with_calc
+    end
+  end
+
+  def self.with_relations
+    all.map do |s|
+      s.with_relations
     end
   end
 
