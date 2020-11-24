@@ -28,30 +28,47 @@ class Sitter < ApplicationRecord
 
   ## CLASS METHODS
 
-    def self.find_by_availabilities(params)
+    def self.find_available(params)
       day, start_time, duration = params.values_at("day", "startTime", "duration")
-
+      start_date = DateTime.parse(day + " " + start_time)
+      end_date = start_date + duration.to_i.minutes
       weekday = Date.parse(day).cwday
 
-      join_clause = <<-SQL 
+      av_join = <<-SQL 
         INNER JOIN (
           SELECT 
             availabilities.*, 
             (EXTRACT(epoch FROM \'#{start_time}\' - availabilities.start_time) / 60) AS query_start_minus_record_start,  
             (\'#{duration}\' - availabilities.duration_minutes) AS query_duration_minus_record_duration   
             FROM "availabilities"
-          ) AS a
-        ON sitters.id = a.sitter_id
+          ) AS av
+        ON sitters.id = av.sitter_id
+      SQL
+
+      ap_join = <<-SQL 
+        INNER JOIN (
+          SELECT 
+		        *,
+            start_time + (duration_minutes * interval '1 minute') AS end_time
+	        FROM appointments
+        ) AS ap
+        ON sitters.id = ap.sitter_id
       SQL
 
       where_clause = <<-SQL
-          weekday = #{weekday} AND
-          a.query_start_minus_record_start >= 0 AND
-          a.query_duration_minus_record_duration <= 0 AND
-          a.query_start_minus_record_start + a.query_duration_minus_record_duration <= 0
+        (
+          av.weekday = #{weekday} AND
+          av.query_start_minus_record_start >= 0 AND
+          av.query_duration_minus_record_duration <= 0 AND
+          av.query_start_minus_record_start + av.query_duration_minus_record_duration <= 0
+        ) AND (
+          ap.start_time > \'#{end_date}\' OR
+          ap.end_time < \'#{start_date}\'
+        )
       SQL
 
-    joins(join_clause).where(where_clause).group("sitters.id")
+    results = joins(av_join, ap_join).where(where_clause).group("sitters.id")
+    results
   end
 
   def self.with_calc
