@@ -8,6 +8,7 @@ const HelloWorld = (props) => {
   return (
     <>
     <BrowserRouter>
+      <h1>react controller</h1>
       <Switch>
         <Route path="/about">
           <h1>about</h1>
