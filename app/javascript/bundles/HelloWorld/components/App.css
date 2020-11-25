@@ -1,0 +1,182 @@
+/* 
+=== LAYOUT
+*/
+
+.home {
+  background-image: url(./assets/grass_kid_faded.jpeg);
+  background-size: cover;
+}
+
+.opaque,
+.container {
+  background: rgba(255, 255, 255, 0.2);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.right-arrow {
+  justify-self: flex-end;
+}
+
+.back-button {
+  align-self: flex-start;
+  border: none;
+  background: none;
+  margin: 10px;
+  padding: 10px;
+}
+
+.back-button:focus {
+  border: none;
+}
+
+ul {
+  width: 100%;
+  align-self: flex-start;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li a {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.3px solid #707070;
+  padding-bottom: 10px;
+  color: inherit;
+}
+
+/* 
+=== TYPOGRAPHY
+*/
+
+.header {
+  font-family: "Helvetica Neue", Regular;
+  font-size: 14px;
+}
+
+.home-message {
+  font-size: 80px;
+  font-family: "Helvetica Neue", Bold;
+  align-self: baseline;
+}
+
+h1 {
+  font-family: "Helvetica Neue", Bold;
+  align-self: flex-start;
+}
+
+.find-sitter-menu {
+  font-family: "Helvetica Neue";
+  font-weight: 700;
+  font-size: 14px;
+  color: #707070;
+}
+
+.dropdown,
+.dropdown-time-container {
+  font-family: "Helvetica Neue";
+  font-weight: 400;
+  font-size: 25px;
+  color: #000000;
+}
+
+.find-sitter-button {
+  font-family: "Helvetica Neue";
+  font-weight: 400;
+  font-size: 25px;
+  color: white;
+}
+
+/* 
+=== DESIGN
+ */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.background-blur {
+  padding: 17px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(30px) brightness(115%);
+  align-self: stretch;
+}
+
+.dropdown {
+  background-color: white;
+  border-radius: 8px;
+  padding: 9px 13px;
+  border: 1px solid white;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-time-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown-time-container hr {
+  height: 3px;
+  width: 20px;
+  margin: auto 10px;
+  background-color: #000000;
+  border-width: 0;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.find-sitter-menu-label {
+  margin-bottom: 12px;
+  display: block;
+}
+
+.find-sitter-menu-section {
+  margin-bottom: 35px;
+}
+
+.find-sitter-menu-section:last-child {
+  margin-bottom: 10px;
+}
+
+.find-sitter-button {
+  background-color: black;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.invalid-time {
+  border: 0.5px solid red;
+  box-sizing: border-box;
+}
+
+.invalid-time-message {
+  font-size: 60%;
+  color: red;
+  position: absolute;
+  left: 5%;
+  bottom: -40%;
+}
