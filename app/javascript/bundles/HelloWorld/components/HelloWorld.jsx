@@ -1,20 +1,22 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 const HelloWorld = (props) => {
   const [name, setName] = useState(props.name);
 
   return (
-    <div>
-      <h3>Hello, {name}!</h3>
-      <hr />
-      <form>
-        <label htmlFor="name">
-          Say hello to:
-          <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </label>
-      </form>
-    </div>
+    <>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/about">
+          <h1>about</h1>
+        </Route>
+      </Switch>
+    </BrowserRouter>
+    
+    
+    </>
   );
 };
 
