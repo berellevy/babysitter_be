@@ -41,4 +41,6 @@ end
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'active_model_serializers', '~> 0.10.0'
+gem "react_on_rails", "12.0.0"
+gem "webpacker", "~> 5"
 
