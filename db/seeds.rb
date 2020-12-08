@@ -1,4 +1,15 @@
-def main_seed_process
+def unseed
+  Appointment.destroy_all
+  puts "Appointments DESTROYED"
+  Availability.destroy_all
+  puts "Availabilities DESTROYED"
+  Reference.destroy_all
+  puts "References DESTROYED"
+  Sitter.destroy_all
+  puts "Sitters DESTROYED"
+end
+
+def seed
 
   first_names = [
     "Gitty",
@@ -131,17 +142,6 @@ def main_seed_process
     end
   end
 
-
-
-  Appointment.destroy_all
-  puts "Appointments DESTROYED"
-  Availability.destroy_all
-  puts "Availabilities DESTROYED"
-  Reference.destroy_all
-  puts "References DESTROYED"
-  Sitter.destroy_all
-  puts "Sitters DESTROYED"
-
   40.times do
     sitter = create_sitter(first_names, last_names, relations)
 
@@ -176,4 +176,6 @@ def main_seed_process
 
 end
 
-main_seed_process
+
+unseed
+# seed
