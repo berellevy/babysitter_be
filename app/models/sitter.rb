@@ -3,7 +3,86 @@ class Sitter < ApplicationRecord
   has_many :availabilities
   has_many :appointments
 
-  ## INSTANCE METHODS
+  ## AUTH METHODS
+
+  def self.register_sitter_from_google(data)
+    sitter = find_by(uid: data["email"])
+    if !sitter
+      sitter = create(
+        provider: "google_oauth2",
+        uid: data["email"],
+        first_name: data["given_name"],
+        last_name: data["family_name"],
+        access_token: SecureRandom.hex(10),
+        access_token_date: Time.now
+      )
+    end
+    {
+      token: sitter.jwt_access_token
+    }
+  end
+
+  def generate_access_token
+    self.access_token = SecureRandom.hex(10)
+    self.access_token_date = Time.now
+    self.save
+    jwt_access_token
+  end
+
+  def verify_access_token(token)
+    JsonWebToken.decode(token) == access_token
+  end
+
+  def jwt_access_token
+    JsonWebToken.encode(access_token)
+  end
+  
+  def token_age
+    Time.now - access_token_date
+  end
+
+  def expire_age
+    1.day
+  end
+
+  def token_expired?
+    token_age >= expire_age
+  end
+
+  def token_expiring?
+    token_age >= expire_age / 2
+  end
+
+  def refresh_token
+    if token_expiring?
+      generate_access_token
+    else
+      nil
+    end
+  end
+
+  def self.find_by_token(token)
+    token = JsonWebToken.decode(token)
+    sitter = find_by(access_token: token)
+    if sitter && !sitter.token_expired?
+      return sitter
+    end
+  end
+
+  def authenticate_sitter(token)
+    response = {}
+    if verify_access_token(token) && !token_expired?
+      if token_expiring?
+        response[:token] = generate_access_token
+      end
+      response[:sitter] = self
+    else
+      response[:error] = "invalid credentials"
+    end
+    response
+  end
+
+  ## SITTER_INFO
   
   def age 
     ((Time.zone.now - birthday.to_time) / 1.year.seconds).floor
@@ -26,7 +105,8 @@ class Sitter < ApplicationRecord
   end
 
 
-  ## CLASS METHODS
+
+  ## SITTER QUERY METHODS
 
     def self.find_available(params)
       day, start_time, duration = params.values_at("day", "startTime", "duration")
