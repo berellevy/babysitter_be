@@ -5,12 +5,12 @@ class Api::V1::AuthorizationController < ApplicationController
   include HTTParty
 
   def login
-    google_user_info = register_with_google(login_params["id_token"])
-    if google_user_info
-      user = User.register_user_from_google(google_user_info)
-      render json: user
+    google_sitter_info = register_with_google(login_params["id_token"])
+    if google_sitter_info
+      sitter_token = Sitter.register_sitter_from_google(google_sitter_info)
+      render json: sitter_token
     else
-      render json: {error: "login failure"}
+      render json: {error: "login failure"}, status: :unauthorized
     end
   end
 
@@ -34,6 +34,6 @@ class Api::V1::AuthorizationController < ApplicationController
 
   def login_params
     params.permit("id_token")
-  end
-                                      
+  end   
+
 end
