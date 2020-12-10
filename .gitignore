@@ -27,3 +27,6 @@
 /config/master.key
 node_modules
 .env
+
+# Ignore application configuration
+/config/application.yml
