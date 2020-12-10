@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       get "sitters/:id", to: "public#show"
       post 'auth/login', to: 'authorization#login'
       get 'sitter', to: "sitters#show"
+      post 'appointments', to: "sitters#new_appointment"
+      get "appointments", to: "sitters#appointments"
     end
   end
 end
