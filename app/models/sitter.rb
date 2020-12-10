@@ -97,14 +97,12 @@ class Sitter < ApplicationRecord
 
   def with_relations
     {
-      **with_calc, 
+      **with_calc,
       references: references,
       availabilities: availabilities,
       appointments: appointments
     }
   end
-
-
 
   ## SITTER QUERY METHODS
 
