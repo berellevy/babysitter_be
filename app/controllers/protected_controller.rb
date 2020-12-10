@@ -17,11 +17,11 @@ class ProtectedController < ApplicationController
   end
 
   def authenticate
-    return {unauthorized: "invalid credentials"} unless current_sitter
+    render json: {unauthorized: "invalid credentials"}, status: :unauthorized unless current_sitter
   end
 
   def render *args
-    refresh_token = current_sitter.refresh_token
+    refresh_token = current_sitter && current_sitter.refresh_token
     if refresh_token
       response.set_header("refresh_token", refresh_token)
       response.set_header("Access-Control-Expose-Headers", "refresh_token")
