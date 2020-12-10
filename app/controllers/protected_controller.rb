@@ -17,7 +17,7 @@ class ProtectedController < ApplicationController
   end
 
   def authenticate
-    puts "begin auth"
+    puts auth_header
     render json: {unauthorized: "invalid credentials"}, status: :unauthorized unless current_sitter
     puts "end auth"
   end
