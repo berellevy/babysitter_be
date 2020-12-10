@@ -18,7 +18,7 @@ class Sitter < ApplicationRecord
       )
     end
     {
-      token: sitter.jwt_access_token
+      token: sitter.generate_access_token
     }
   end
 
