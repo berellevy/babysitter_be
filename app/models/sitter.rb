@@ -134,7 +134,8 @@ class Sitter < ApplicationRecord
       SQL
 
       where_clause = <<-SQL
-        (
+        ( 
+          sitters.approved = true AND
           av.weekday = #{weekday} AND
           av.query_start_minus_record_start >= 0 AND
           av.query_duration_minus_record_duration <= 0 AND
