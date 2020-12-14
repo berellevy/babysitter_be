@@ -20,8 +20,20 @@ def add_availabilities(sitter)
   end  
 end
 
-sitter = Sitter.first
+def unseed_availabilities
+  Availability.delete_all
+end
 
-add_availabilities(sitter)
 
-pp sitter.availabilities.length
+
+unseed_availabilities
+pp "Availabilities deleted"
+
+
+Sitter.all.each do |s|
+
+  add_availabilities(s)
+end
+
+
+pp Availability.count
