@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get 'sitter', to: "sitters#show"
       post 'appointments', to: "sitters#new_appointment"
       get "appointments", to: "sitters#appointments"
+      patch "update_sitter", to: "sitters#update_sitter"
     end
   end
 end

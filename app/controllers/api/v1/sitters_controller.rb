@@ -22,11 +22,24 @@ class Api::V1::SittersController < ProtectedController
       render json: {errors: appointment.errors}, status: 404
     end
   end
+
+  def update_sitter
+    current_sitter.update_attributes(sitter_params)
+    render json: current_sitter
+
+    
+  end
+  
   
   private
 
   def appointment_params
     params.permit(:startDate, :selection, :phone, :name)
   end
+
+  def sitter_params
+    params.permit(:first_name, :last_name, :contact_name, :contact_phone, :birthday, :years_of_experience, :price)
+  end
+  
 
 end
