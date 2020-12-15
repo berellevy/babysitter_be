@@ -31,10 +31,30 @@ class Api::V1::SittersController < ProtectedController
   def references
     render json: current_sitter.references
   end
+
+  def add_reference
+    r = current_sitter.references.new(
+      reference_params
+    )
+    if r.save
+      render({
+        json: r, 
+        only: [:id, :name, :phone]
+      })
+    end
+    
+
+  end
+  
   
   
   
   private
+
+  def reference_params
+    params.permit(:name, :phone)
+  end
+  
 
   def appointment_params
     params.permit(:startDate, :selection, :phone, :name)
