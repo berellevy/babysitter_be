@@ -24,11 +24,14 @@ class Api::V1::SittersController < ProtectedController
   end
 
   def update_sitter
-    current_sitter.update_attributes(sitter_params)
+    current_sitter.update(sitter_params)
     render json: current_sitter
-
-    
   end
+
+  def references
+    render json: current_sitter.references
+  end
+  
   
   
   private
