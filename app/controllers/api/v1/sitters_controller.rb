@@ -29,7 +29,10 @@ class Api::V1::SittersController < ProtectedController
   end
 
   def references
-    render json: current_sitter.references
+    render({
+      json: current_sitter.references,
+      only: [:id, :name, :phone]
+    })
   end
 
   def add_reference
@@ -42,10 +45,23 @@ class Api::V1::SittersController < ProtectedController
         only: [:id, :name, :phone]
       })
     end
-    
 
+    
+    
+    
   end
   
+  def update_reference
+    reference = current_sitter.references.find_by(id: params[:id])
+    
+    if reference.update(reference_params)
+      render({
+        json: reference,
+        only: [:id, :name, :phone]
+      })
+    end
+    
+  end
   
   
   
