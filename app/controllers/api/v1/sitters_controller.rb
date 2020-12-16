@@ -39,16 +39,13 @@ class Api::V1::SittersController < ProtectedController
     r = current_sitter.references.new(
       reference_params
     )
+
     if r.save
       render({
         json: r, 
         only: [:id, :name, :phone]
       })
     end
-
-    
-    
-    
   end
   
   def update_reference
@@ -58,6 +55,17 @@ class Api::V1::SittersController < ProtectedController
       render({
         json: reference,
         only: [:id, :name, :phone]
+      })
+    end
+  end
+
+  def delete_reference
+    reference = current_sitter.references.find_by(id: params[:id])
+    if reference
+      reference.delete
+      render({
+        json: {message: "deleted"},
+        status: :ok
       })
     end
     

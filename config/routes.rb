@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get "references", to: "sitters#references"
       post "references", to: "sitters#add_reference"
       patch "references", to: "sitters#update_reference"
+      delete "references", to: "sitters#delete_reference"
     end
   end
 end
