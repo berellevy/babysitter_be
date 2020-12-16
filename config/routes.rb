@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       patch "update_sitter", to: "sitters#update_sitter"
       get "references", to: "sitters#references"
       post "references", to: "sitters#add_reference"
+      patch "references", to: "sitters#update_reference"
     end
   end
 end
