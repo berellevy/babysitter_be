@@ -68,8 +68,23 @@ class Api::V1::SittersController < ProtectedController
         status: :ok
       })
     end
-    
   end
+
+  def get_is_available
+    available = current_sitter.available
+    render({
+      json: available
+    })
+  end
+
+  def set_is_available
+    current_sitter.update({
+      available: sitter_params[:available]
+    })
+    render json: current_sitter.available
+  end
+  
+  
   
   
   
@@ -85,7 +100,7 @@ class Api::V1::SittersController < ProtectedController
   end
 
   def sitter_params
-    params.permit(:first_name, :last_name, :contact_name, :contact_phone, :birthday, :years_of_experience, :price)
+    params.permit(:first_name, :last_name, :contact_name, :contact_phone, :birthday, :years_of_experience, :price, :available)
   end
   
 
